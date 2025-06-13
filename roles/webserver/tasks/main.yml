@@ -1,0 +1,18 @@
+- name: Installer Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Déployer page web
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Redémarrer Nginx
+  service:
+    name: nginx
+    state: restarted
